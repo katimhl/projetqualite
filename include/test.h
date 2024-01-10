@@ -401,3 +401,29 @@ TEST_SUITE("PacManTerrain Tests") {
         }
     }
 }
+//------------------------------------------------------------------------------------------------------------
+TEST_SUITE("PacManTerrain Tests") {
+
+    TEST_CASE("Display Function") {
+        PacManTerrain terrain;
+
+        SUBCASE("Check Non-Empty Output") {
+            std::stringstream outputBuffer;
+            std::streambuf* oldCoutBuffer = std::cout.rdbuf();
+            std::cout.rdbuf(outputBuffer.rdbuf());
+
+            // Appeler la fonction display
+            terrain.display();
+
+            std::cout.rdbuf(oldCoutBuffer); // Restaurer le buffer de sortie
+
+            // Vérifier que la sortie n'est pas vide
+            CHECK_FALSE(outputBuffer.str().empty());
+        }
+
+        SUBCASE("Check No Crash") {
+            // Appeler la fonction display sans vérification spécifique
+            CHECK_NOTHROW(terrain.display());
+        }
+    }
+}
