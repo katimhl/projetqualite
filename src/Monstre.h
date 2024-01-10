@@ -45,14 +45,7 @@ public:
         return posY;
     }
 
-private:
-    int posX;
-    int posY;
-    bool estVoyant_;
-    int pointsVie_;
-    int pointsForce_;
-    double pourcentageHabilete_;
- // G�n�rer al�atoirement une direction (vers le haut, le bas, la gauche, ou la droite)
+    // G�n�rer al�atoirement une direction (vers le haut, le bas, la gauche, ou la droite)
     void deplacerMonstreAveugle(const Cell terrain[ROWS][COLS]) {
         int directionX, directionY;
 
@@ -93,4 +86,13 @@ private:
     bool isValidMove(int row, int col, const Cell terrain[ROWS][COLS]) const {
         return row >= 0 && row < ROWS && col >= 0 && col < COLS && terrain[row][col] == EMPTY;
     }
+
+private:
+    int posX;
+    int posY;
+    bool estVoyant_;
+    int pointsVie_;
+    int pointsForce_;
+    double pourcentageHabilete_;
+ 
 };

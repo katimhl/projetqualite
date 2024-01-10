@@ -61,14 +61,17 @@ public:
                 break;
         }
     }
-/*d�place le monstre en fonction de sa logique de d�placement,
- en prenant la position actuelle du joueur (pacmanRow et pacmanCol)
-  et le terrain actuel comme param�tres.*/
+    /*d�place le monstre en fonction de sa logique de d�placement,
+    en prenant la position actuelle du joueur (pacmanRow et pacmanCol)
+    et le terrain actuel comme param�tres.*/
     void moveMonsters() {
         for (auto& monstre : monstres) {
             monstre.deplacerMonstre(pacmanRow, pacmanCol, terrain);
             monstre.attaquerAventurier(); // Appel de la fonction d'attaque du monstre
         }
+    }
+    Cell getTerrain(){
+        return terrain[ROWS][COLS];
     }
 
 private:
