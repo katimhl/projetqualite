@@ -7,11 +7,11 @@
 
 
 
-TEST_CASE("Déplacement du monstre aveugle") {
+TEST_CASE("Dï¿½placement du monstre aveugle") {
     PacManTerrain pacManTerrain;
     Monstre monstre(5, 5, false, 2, 5, 0.8);
 
-    // Déplacer le monstre aveugle plusieurs fois (10 fois dans cet exemple)
+    // Dï¿½placer le monstre aveugle plusieurs fois (10 fois dans cet exemple)
     for (int i = 0; i < 10; ++i) {
         monstre.deplacerMonstre(0, 0, pacManTerrain.getTerrain());
         REQUIRE(pacManTerrain.isValidMove(monstre.getX(), monstre.getY()));
@@ -21,28 +21,28 @@ TEST_CASE("Déplacement du monstre aveugle") {
 
 
 TEST_CASE("Monstre attaque l'aventurier") {
-    SUBCASE("Attaque réussie avec probabilité élevée") {
-        // Créer un monstre avec une probabilité d'attaque élevée
+    SUBCASE("Attaque rï¿½ussie avec probabilitï¿½ ï¿½levï¿½e") {
+        // Crï¿½er un monstre avec une probabilitï¿½ d'attaque ï¿½levï¿½e
         Monstre monstre(0, 0, true, 10, 5, 0.9);
 
-        // Appeler la méthode attaquerAventurier plusieurs fois
+        // Appeler la mï¿½thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
             monstre.attaquerAventurier();
-            // Vérifier que l'attaque est appliquée à l'aventurier lorsque la probabilité est respectée
+            // Vï¿½rifier que l'attaque est appliquï¿½e ï¿½ l'aventurier lorsque la probabilitï¿½ est respectï¿½e
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10 - static_cast<int>(5 * 0.9));
             }
         }
     }
 
-    SUBCASE("Aucune attaque avec probabilité basse") {
-        // Créer un monstre avec une probabilité d'attaque basse
+    SUBCASE("Aucune attaque avec probabilitï¿½ basse") {
+        // Crï¿½er un monstre avec une probabilitï¿½ d'attaque basse
         Monstre monstre(0, 0, true, 10, 5, 0.1);
 
-        // Appeler la méthode attaquerAventurier plusieurs fois
+        // Appeler la mï¿½thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
             monstre.attaquerAventurier();
-            // Vérifier que l'attaque n'est pas appliquée à l'aventurier lorsque la probabilité n'est pas respectée
+            // Vï¿½rifier que l'attaque n'est pas appliquï¿½e ï¿½ l'aventurier lorsque la probabilitï¿½ n'est pas respectï¿½e
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10);
             }
@@ -50,13 +50,13 @@ TEST_CASE("Monstre attaque l'aventurier") {
     }
 
     SUBCASE("Monstre aveugle n'attaque pas") {
-        // Créer un monstre aveugle
+        // Crï¿½er un monstre aveugle
         Monstre monstre(0, 0, false, 10, 5, 0.9);
 
-        // Appeler la méthode attaquerAventurier plusieurs fois
+        // Appeler la mï¿½thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
             monstre.attaquerAventurier();
-            // Vérifier que l'attaque n'est pas appliquée à l'aventurier (monstre aveugle ne devrait pas attaquer)
+            // Vï¿½rifier que l'attaque n'est pas appliquï¿½e ï¿½ l'aventurier (monstre aveugle ne devrait pas attaquer)
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10);
             }
@@ -66,54 +66,54 @@ TEST_CASE("Monstre attaque l'aventurier") {
 
 //------------------------------------------------------------------------------------------------------------
 
-TEST_CASE("Monstre reçoit une attaque") {
+TEST_CASE("Monstre reï¿½oit une attaque") {
     SECTION("Points de vie positifs") {
-        // Créer un monstre avec des points de vie positifs
+        // Crï¿½er un monstre avec des points de vie positifs
         Monstre monstre(0, 0, true, 10, 5, 0.9);
 
-        // Appeler la méthode recevoirAttaque avec une valeur d'attaque
+        // Appeler la mï¿½thode recevoirAttaque avec une valeur d'attaque
         monstre.recevoirAttaque(3);
 
-        // Vérifier que les points de vie sont correctement mis à jour après l'attaque
+        // Vï¿½rifier que les points de vie sont correctement mis ï¿½ jour aprï¿½s l'attaque
         REQUIRE(monstre.getPointsVie() == 7);
     }
 
     SECTION("Points de vie nuls") {
-        // Créer un monstre avec des points de vie nuls
+        // Crï¿½er un monstre avec des points de vie nuls
         Monstre monstre(0, 0, true, 0, 5, 0.9);
 
-        // Appeler la méthode recevoirAttaque avec une valeur d'attaque
+        // Appeler la mï¿½thode recevoirAttaque avec une valeur d'attaque
         monstre.recevoirAttaque(3);
 
-        // Vérifier que les points de vie restent nuls après l'attaque
+        // Vï¿½rifier que les points de vie restent nuls aprï¿½s l'attaque
         REQUIRE(monstre.getPointsVie() == 0);
     }
 
-    SECTION("Points de vie négatifs") {
-        // Créer un monstre avec des points de vie négatifs
+    SECTION("Points de vie nï¿½gatifs") {
+        // Crï¿½er un monstre avec des points de vie nï¿½gatifs
         Monstre monstre(0, 0, true, -5, 5, 0.9);
 
-        // Appeler la méthode recevoirAttaque avec une valeur d'attaque
+        // Appeler la mï¿½thode recevoirAttaque avec une valeur d'attaque
         monstre.recevoirAttaque(3);
 
-        // Vérifier que les points de vie restent nuls après l'attaque
+        // Vï¿½rifier que les points de vie restent nuls aprï¿½s l'attaque
         REQUIRE(monstre.getPointsVie() == 0);
     }
 }
 //-------------------------------------------------------------------------------------------------------------
-TEST_CASE("Déplacement du monstre aveugle") {
-    SECTION("Déplacement valide vers le haut") {
-        // Créer un monstre à une position
+TEST_CASE("Dï¿½placement du monstre aveugle") {
+    SECTION("Dï¿½placement valide vers le haut") {
+        // Crï¿½er un monstre ï¿½ une position
         Monstre monstre(5, 5, false, 2, 5, 0.8);
 
-        // Créer un terrain avec une cellule vide à la nouvelle position souhaitée
+        // Crï¿½er un terrain avec une cellule vide ï¿½ la nouvelle position souhaitï¿½e
         Cell terrain[ROWS][COLS] = {EMPTY};
         terrain[4][5] = EMPTY;
 
-        // Appeler la méthode deplacerMonstreAveugle
+        // Appeler la mï¿½thode deplacerMonstreAveugle
         monstre.deplacerMonstreAveugle(terrain);
 
-        // Vérifier que le monstre a été déplacé vers le haut
+        // Vï¿½rifier que le monstre a ï¿½tï¿½ dï¿½placï¿½ vers le haut
         REQUIRE(monstre.getX() == 4);
         REQUIRE(monstre.getY() == 5);
     }
@@ -121,19 +121,19 @@ TEST_CASE("Déplacement du monstre aveugle") {
 
 }
 //---------------------------------------------------------------------------------------------------------
-TEST_CASE("Déplacement du monstre voyant") {
-    SECTION("Déplacement vers le joueur vers la droite") {
-        // Créer un monstre à une position
+TEST_CASE("Dï¿½placement du monstre voyant") {
+    SECTION("Dï¿½placement vers le joueur vers la droite") {
+        // Crï¿½er un monstre ï¿½ une position
         Monstre monstre(5, 5, true, 2, 5, 0.8);
 
-        // Créer un terrain avec une cellule vide à la nouvelle position souhaitée
+        // Crï¿½er un terrain avec une cellule vide ï¿½ la nouvelle position souhaitï¿½e
         Cell terrain[ROWS][COLS] = {EMPTY};
         terrain[5][6] = EMPTY;
 
-        // Appeler la méthode deplacerMonstreVoyant
+        // Appeler la mï¿½thode deplacerMonstreVoyant
         monstre.deplacerMonstreVoyant(5, 6, terrain);
 
-        // Vérifier que le monstre a été déplacé vers la droite
+        // Vï¿½rifier que le monstre a ï¿½tï¿½ dï¿½placï¿½ vers la droite
         REQUIRE(monstre.getX() == 5);
         REQUIRE(monstre.getY() == 6);
     }
@@ -144,22 +144,22 @@ TEST_CASE("Déplacement du monstre voyant") {
 TEST_CASE("Validation du mouvement") {
     PacManTerrain pacManTerrain;
     SECTION("Case valide") {
-        // Créer un terrain avec une cellule vide à la position spécifiée
+        // Crï¿½er un terrain avec une cellule vide ï¿½ la position spï¿½cifiï¿½e
         Cell terrain[ROWS][COLS] = {EMPTY};
         terrain[2][3] = EMPTY;
 
-        // Appeler la méthode isValidMove
+        // Appeler la mï¿½thode isValidMove
         bool result = pacManTerrain.isValidMove(2, 3, terrain);
 
-        // Vérifier que le mouvement est valide
+        // Vï¿½rifier que le mouvement est valide
         REQUIRE(result == true);
     }
 
     SECTION("Case invalide - en dehors des limites en X") {
-        // Appeler la méthode isValidMove avec une position en dehors des limites en X
-        bool result = pacManTerrain.isValidMove(-1, 3, nullptr); // Passer nullptr pour le terrain, car il n'est pas utilisé dans cet exemple
+        // Appeler la mï¿½thode isValidMove avec une position en dehors des limites en X
+        bool result = pacManTerrain.isValidMove(-1, 3, nullptr); // Passer nullptr pour le terrain, car il n'est pas utilisï¿½ dans cet exemple
 
-        // Vérifier que le mouvement est invalide
+        // Vï¿½rifier que le mouvement est invalide
         REQUIRE(result == false);
     }
 
