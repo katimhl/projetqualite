@@ -7,11 +7,11 @@
 
 
 
-TEST_CASE("DÈplacement du monstre aveugle") {
+TEST_CASE("D√©placement du monstre aveugle") {
     PacManTerrain pacManTerrain;
     Monstre monstre(5, 5, false, 2, 5, 0.8);
 
-    // DÈplacer le monstre aveugle plusieurs fois (10 fois dans cet exemple)
+    // D√©placer le monstre aveugle plusieurs fois (10 fois dans cet exemple)
     for (int i = 0; i < 10; ++i) {
         monstre.deplacerMonstre(0, 0, pacManTerrain.getTerrain());
         REQUIRE(pacManTerrain.isValidMove(monstre.getX(), monstre.getY()));
@@ -21,28 +21,28 @@ TEST_CASE("DÈplacement du monstre aveugle") {
 
 
 TEST_CASE("Monstre attaque l'aventurier") {
-    SUBCASE("Attaque rÈussie avec probabilitÈ ÈlevÈe") {
-        // CrÈer un monstre avec une probabilitÈ d'attaque ÈlevÈe
+    SUBCASE("Attaque r√©ussie avec probabilit√© √©lev√©e") {
+        // Cr√©er un monstre avec une probabilit√© d'attaque √©lev√©e
         Monstre monstre(0, 0, true, 10, 5, 0.9);
 
-        // Appeler la mÈthode attaquerAventurier plusieurs fois
+        // Appeler la m√©thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
             monstre.attaquerAventurier();
-            // VÈrifier que l'attaque est appliquÈe ‡ l'aventurier lorsque la probabilitÈ est respectÈe
+            // V√©rifier que l'attaque est appliqu√©e √† l'aventurier lorsque la probabilit√© est respect√©e
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10 - static_cast<int>(5 * 0.9));
             }
         }
     }
 
-    SUBCASE("Aucune attaque avec probabilitÈ basse") {
-        // CrÈer un monstre avec une probabilitÈ d'attaque basse
+    SUBCASE("Aucune attaque avec probabilit√© basse") {
+        // Cr√©er un monstre avec une probabilit√© d'attaque basse
         Monstre monstre(0, 0, true, 10, 5, 0.1);
 
-        // Appeler la mÈthode attaquerAventurier plusieurs fois
+        // Appeler la m√©thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
             monstre.attaquerAventurier();
-            // VÈrifier que l'attaque n'est pas appliquÈe ‡ l'aventurier lorsque la probabilitÈ n'est pas respectÈe
+            // V√©rifier que l'attaque n'est pas appliqu√©e √† l'aventurier lorsque la probabilit√© n'est pas respect√©e
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10);
             }
@@ -50,13 +50,13 @@ TEST_CASE("Monstre attaque l'aventurier") {
     }
 
     SUBCASE("Monstre aveugle n'attaque pas") {
-        // CrÈer un monstre aveugle
+        // Cr√©er un monstre aveugle
         Monstre monstre(0, 0, false, 10, 5, 0.9);
 
-        // Appeler la mÈthode attaquerAventurier plusieurs fois
+        // Appeler la m√©thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
             monstre.attaquerAventurier();
-            // VÈrifier que l'attaque n'est pas appliquÈe ‡ l'aventurier (monstre aveugle ne devrait pas attaquer)
+            // V√©rifier que l'attaque n'est pas appliqu√©e √† l'aventurier (monstre aveugle ne devrait pas attaquer)
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10);
             }
@@ -66,54 +66,54 @@ TEST_CASE("Monstre attaque l'aventurier") {
 
 //------------------------------------------------------------------------------------------------------------
 
-TEST_CASE("Monstre reÁoit une attaque") {
+TEST_CASE("Monstre re√ßoit une attaque") {
     SECTION("Points de vie positifs") {
-        // CrÈer un monstre avec des points de vie positifs
+        // Cr√©er un monstre avec des points de vie positifs
         Monstre monstre(0, 0, true, 10, 5, 0.9);
 
-        // Appeler la mÈthode recevoirAttaque avec une valeur d'attaque
+        // Appeler la m√©thode recevoirAttaque avec une valeur d'attaque
         monstre.recevoirAttaque(3);
 
-        // VÈrifier que les points de vie sont correctement mis ‡ jour aprËs l'attaque
+        // V√©rifier que les points de vie sont correctement mis √† jour apr√®s l'attaque
         REQUIRE(monstre.getPointsVie() == 7);
     }
 
     SECTION("Points de vie nuls") {
-        // CrÈer un monstre avec des points de vie nuls
+        // Cr√©er un monstre avec des points de vie nuls
         Monstre monstre(0, 0, true, 0, 5, 0.9);
 
-        // Appeler la mÈthode recevoirAttaque avec une valeur d'attaque
+        // Appeler la m√©thode recevoirAttaque avec une valeur d'attaque
         monstre.recevoirAttaque(3);
 
-        // VÈrifier que les points de vie restent nuls aprËs l'attaque
+        // V√©rifier que les points de vie restent nuls apr√®s l'attaque
         REQUIRE(monstre.getPointsVie() == 0);
     }
 
-    SECTION("Points de vie nÈgatifs") {
-        // CrÈer un monstre avec des points de vie nÈgatifs
+    SECTION("Points de vie n√©gatifs") {
+        // Cr√©er un monstre avec des points de vie n√©gatifs
         Monstre monstre(0, 0, true, -5, 5, 0.9);
 
-        // Appeler la mÈthode recevoirAttaque avec une valeur d'attaque
+        // Appeler la m√©thode recevoirAttaque avec une valeur d'attaque
         monstre.recevoirAttaque(3);
 
-        // VÈrifier que les points de vie restent nuls aprËs l'attaque
+        // V√©rifier que les points de vie restent nuls apr√®s l'attaque
         REQUIRE(monstre.getPointsVie() == 0);
     }
 }
 //-------------------------------------------------------------------------------------------------------------
-TEST_CASE("DÈplacement du monstre aveugle") {
-    SECTION("DÈplacement valide vers le haut") {
-        // CrÈer un monstre ‡ une position
+TEST_CASE("D√©placement du monstre aveugle") {
+    SECTION("D√©placement valide vers le haut") {
+        // Cr√©er un monstre √† une position
         Monstre monstre(5, 5, false, 2, 5, 0.8);
 
-        // CrÈer un terrain avec une cellule vide ‡ la nouvelle position souhaitÈe
+        // Cr√©er un terrain avec une cellule vide √† la nouvelle position souhait√©e
         Cell terrain[ROWS][COLS] = {EMPTY};
         terrain[4][5] = EMPTY;
 
-        // Appeler la mÈthode deplacerMonstreAveugle
+        // Appeler la m√©thode deplacerMonstreAveugle
         monstre.deplacerMonstreAveugle(terrain);
 
-        // VÈrifier que le monstre a ÈtÈ dÈplacÈ vers le haut
+        // V√©rifier que le monstre a √©t√© d√©plac√© vers le haut
         REQUIRE(monstre.getX() == 4);
         REQUIRE(monstre.getY() == 5);
     }
@@ -121,19 +121,19 @@ TEST_CASE("DÈplacement du monstre aveugle") {
 
 }
 //---------------------------------------------------------------------------------------------------------
-TEST_CASE("DÈplacement du monstre voyant") {
-    SECTION("DÈplacement vers le joueur vers la droite") {
-        // CrÈer un monstre ‡ une position
+TEST_CASE("D√©placement du monstre voyant") {
+    SECTION("D√©placement vers le joueur vers la droite") {
+   
         Monstre monstre(5, 5, true, 2, 5, 0.8);
 
-        // CrÈer un terrain avec une cellule vide ‡ la nouvelle position souhaitÈe
+        
         Cell terrain[ROWS][COLS] = {EMPTY};
         terrain[5][6] = EMPTY;
 
-        // Appeler la mÈthode deplacerMonstreVoyant
+        // Appeler la m√©thode deplacerMonstreVoyant
         monstre.deplacerMonstreVoyant(5, 6, terrain);
 
-        // VÈrifier que le monstre a ÈtÈ dÈplacÈ vers la droite
+        // V√©rifier que le monstre a √©t√© d√©plac√© vers la droite
         REQUIRE(monstre.getX() == 5);
         REQUIRE(monstre.getY() == 6);
     }
@@ -144,26 +144,260 @@ TEST_CASE("DÈplacement du monstre voyant") {
 TEST_CASE("Validation du mouvement") {
     PacManTerrain pacManTerrain;
     SECTION("Case valide") {
-        // CrÈer un terrain avec une cellule vide ‡ la position spÈcifiÈe
+       
         Cell terrain[ROWS][COLS] = {EMPTY};
         terrain[2][3] = EMPTY;
 
-        // Appeler la mÈthode isValidMove
+       
         bool result = pacManTerrain.isValidMove(2, 3, terrain);
 
-        // VÈrifier que le mouvement est valide
+      
         REQUIRE(result == true);
     }
 
     SECTION("Case invalide - en dehors des limites en X") {
-        // Appeler la mÈthode isValidMove avec une position en dehors des limites en X
-        bool result = pacManTerrain.isValidMove(-1, 3, nullptr); // Passer nullptr pour le terrain, car il n'est pas utilisÈ dans cet exemple
+       
+        bool result = pacManTerrain.isValidMove(-1, 3, nullptr); 
 
-        // VÈrifier que le mouvement est invalide
+        // V√©rifier que le mouvement est invalide
         REQUIRE(result == false);
     }
 
 
 }
 //------------------------------------------------------------------------------------------------------------
-#endif // TEST_H
+    TEST_SUITE("PacManTerrain Tests") {
+
+    TEST_CASE("Move Pac-Man") {
+        PacManTerrain terrain;
+
+        SUBCASE("Move Up") {
+            // D√©placement vers le haut
+            terrain.movePacman('a');
+            CHECK(terrain.isValidMove(terrain.pacmanRow - 1, terrain.pacmanCol));
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol)); 
+        }
+
+        SUBCASE("Move Down") {
+            // D√©placement vers le bas
+            terrain.movePacman('b');
+            CHECK(terrain.isValidMove(terrain.pacmanRow + 1, terrain.pacmanCol));
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol));
+        }
+
+        SUBCASE("Move Left") {
+            // D√©placement vers la gauche
+            terrain.movePacman('g');
+            CHECK(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol - 1));
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol));
+        }
+
+        SUBCASE("Move Right") {
+            // D√©placement vers la droite
+            terrain.movePacman('d');
+            CHECK(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol + 1));
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol));
+        }
+
+        SUBCASE("Collect Amulet") {
+            // V√©rification de la collecte de l'amulette
+            terrain.movePacman('d'); // D√©placer Pac-Man sur l'amulette
+            CHECK(terrain.isAmuletCollected()); // L'amulette doit √™tre collect√©e maintenant
+        }
+    }
+
+    TEST_CASE("Move Pac-Man - Edge Cases") {
+        PacManTerrain terrain;
+
+        SUBCASE("Move Up - Against Wall") {
+            // D√©placement vers le haut contre un mur
+            int initialRow = terrain.pacmanRow;
+            terrain.movePacman('a');
+            CHECK(initialRow == terrain.pacmanRow); 
+        }
+
+        SUBCASE("Move Down - Against Wall") {
+            // D√©placement vers le bas contre un mur
+            int initialRow = terrain.pacmanRow;
+            terrain.movePacman('b');
+            CHECK(initialRow == terrain.pacmanRow);
+        }
+
+        SUBCASE("Move Left - Against Wall") {
+            // D√©placement vers la gauche contre un mur
+            int initialCol = terrain.pacmanCol;
+            terrain.movePacman('g');
+            CHECK(initialCol == terrain.pacmanCol);
+        }
+
+        SUBCASE("Move Right - Against Wall") {
+            // D√©placement vers la droite contre un mur
+            int initialCol = terrain.pacmanCol;
+            terrain.movePacman('d');
+            CHECK(initialCol == terrain.pacmanCol);
+        }
+
+        SUBCASE("Move - Outside Limits") {
+            // D√©placement en dehors des limites du terrain
+            int initialRow = terrain.pacmanRow;
+            int initialCol = terrain.pacmanCol;
+
+            // D√©placer Pac-Man vers le haut
+            for (int i = 0; i < 100; ++i) {
+                terrain.movePacman('a');
+            }
+
+            CHECK(initialRow == terrain.pacmanRow); 
+
+            // D√©placer Pac-Man vers la gauche
+            for (int i = 0; i < 100; ++i) {
+                terrain.movePacman('g');
+            }
+
+            CHECK(initialCol == terrain.pacmanCol);
+        }
+    }
+}
+//------------------------------------------------------------------------------------------------------------
+TEST_SUITE("PacManTerrain Tests") {
+
+    TEST_CASE("Collect Amulet") {
+        PacManTerrain terrain;
+
+        SUBCASE("Amulet Not Collected Initially") {
+            // V√©rifier que l'amulette n'est pas collect√©e initialement
+            CHECK_FALSE(terrain.isAmuletCollected());
+        }
+
+        SUBCASE("Collect Amulet") {
+            // D√©placer Pac-Man sur l'amulette
+            terrain.movePacman('d');
+            
+            // V√©rifier que l'amulette est collect√©e apr√®s le d√©placement
+            CHECK(terrain.isAmuletCollected());
+        }
+
+        SUBCASE("Collect Amulet Only Once") {
+            // D√©placer Pac-Man sur l'amulette
+            terrain.movePacman('d');
+
+            // V√©rifier que l'amulette est collect√©e apr√®s le d√©placement
+            CHECK(terrain.isAmuletCollected());
+
+            // D√©placer Pac-Man √† nouveau sur l'amulette
+            terrain.movePacman('d');
+
+            // V√©rifier que l'amulette n'est pas collect√©e une deuxi√®me fois
+            CHECK_FALSE(terrain.isAmuletCollected());
+        }
+    }
+}
+//------------------------------------------------------------------------------------------------------------
+TEST_SUITE("PacManTerrain Tests") {
+
+    TEST_CASE("Move Monsters") {
+        PacManTerrain terrain;
+
+        SUBCASE("Monsters Move Towards Pac-Man") {
+            // R√©cup√©rer les positions initiales des monstres
+            std::vector<std::pair<int, int>> initialMonsterPositions;
+            for (const auto& monstre : terrain.getMonsters()) {
+                initialMonsterPositions.emplace_back(monstre.getX(), monstre.getY());
+            }
+
+            // D√©placer Pac-Man √† une nouvelle position
+            terrain.movePacman('a');
+
+            // V√©rifier que les monstres se d√©placent vers la nouvelle position de Pac-Man
+            const auto& monsters = terrain.getMonsters();
+            for (size_t i = 0; i < monsters.size(); ++i) {
+                CHECK(monsters[i].getX() != initialMonsterPositions[i].first || monsters[i].getY() != initialMonsterPositions[i].second);
+            }
+        }
+
+        SUBCASE("Monsters Do Not Move Outside Terrain") {
+            // D√©placer Pac-Man √† une nouvelle position
+            terrain.movePacman('a');
+
+            // D√©placer les monstres plusieurs fois
+            for (int i = 0; i < 10; ++i) {
+                terrain.moveMonsters();
+            }
+
+            // V√©rifier que les monstres restent √† l'int√©rieur des limites du terrain
+            const auto& monsters = terrain.getMonsters();
+            for (const auto& monstre : monsters) {
+                CHECK(monstre.getX() >= 0);
+                CHECK(monstre.getX() < PacManTerrain::ROWS);
+                CHECK(monstre.getY() >= 0);
+                CHECK(monstre.getY() < PacManTerrain::COLS);
+            }
+        }
+    }
+}
+//------------------------------------------------------------------------------------------------------------
+TEST_SUITE("PacManTerrain Tests") {
+
+    TEST_CASE("isValidMove") {
+        PacManTerrain terrain;
+
+        SUBCASE("Valid Moves Inside Terrain") {
+            // V√©rifier que les mouvements √† l'int√©rieur des limites du terrain sont valides
+            CHECK(terrain.isValidMove(terrain.pacmanRow - 1, terrain.pacmanCol)); // Move Up
+            CHECK(terrain.isValidMove(terrain.pacmanRow + 1, terrain.pacmanCol)); // Move Down
+            CHECK(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol - 1)); // Move Left
+            CHECK(terrain.isValidMove(terrain.pacmanRow, terrain.pacmanCol + 1)); // Move Right
+        }
+
+        SUBCASE("Invalid Moves Outside Terrain") {
+            // V√©rifier que les mouvements en dehors des limites du terrain sont invalides
+            CHECK_FALSE(terrain.isValidMove(-1, terrain.pacmanCol)); 
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, -1));
+            CHECK_FALSE(terrain.isValidMove(PacManTerrain::ROWS, terrain.pacmanCol)); 
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, PacManTerrain::COLS)); 
+        }
+
+        SUBCASE("Invalid Moves into Walls") {
+            // V√©rifier que les mouvements dans les murs sont invalides
+            int wallRow = terrain.pacmanRow - 2;
+            int wallCol = terrain.pacmanCol - 2;
+
+            CHECK_FALSE(terrain.isValidMove(wallRow, terrain.pacmanCol)); 
+            CHECK_FALSE(terrain.isValidMove(terrain.pacmanRow, wallCol)); 
+        }
+    }
+}
+//------------------------------------------------------------------------------------------------------------
+TEST_SUITE("PacManTerrain Tests") {
+
+    TEST_CASE("Amulet Collected State") {
+        PacManTerrain terrain;
+
+        SUBCASE("Amulet Not Collected Initially") {
+            // V√©rifier que l'amulette n'est pas collect√©e initialement
+            CHECK_FALSE(terrain.isAmuletCollected());
+        }
+
+        SUBCASE("Collect Amulet") {
+            // D√©placer Pac-Man sur l'amulette
+            terrain.movePacman('d');
+            
+            // V√©rifier que l'amulette est collect√©e apr√®s le d√©placement
+            CHECK(terrain.isAmuletCollected());
+        }
+
+        SUBCASE("Amulet Not Collectible After Collection") {
+            // D√©placer Pac-Man sur l'amulette
+            terrain.movePacman('d');
+
+            // V√©rifier que l'amulette est collect√©e apr√®s le d√©placement
+            CHECK(terrain.isAmuletCollected());
+
+            // D√©placer Pac-Man √† nouveau sur l'amulette
+            terrain.movePacman('d');
+
+            // V√©rifier que l'amulette n'est pas collect√©e une deuxi√®me fois
+            CHECK_FALSE(terrain.isAmuletCollected());
+        }
+    }
+}
