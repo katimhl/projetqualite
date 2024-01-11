@@ -1,6 +1,7 @@
 #pragma once
 
 #include "constantes.h"
+#include "joueur.h"
 
 class Monstre {
 public:
@@ -16,17 +17,21 @@ public:
         }
     }
 
-    void attaquerAventurier() {
+    void attaquerAventurier(joueur& j) {
         double probabiliteAttaque = (rand() % 100) / 100.0;
         if (probabiliteAttaque < pourcentageHabilete_) {
             int attaque = static_cast<int>(pointsForce_ * 0.9);
             // Appliquer l'attaque � l'aventurier
-
+            j.perd_vie(attaque);
         }
     }
 
     int getPointsVie() const {
         return pointsVie_;
+    }
+
+    int setPointsVie(int pV) {
+        pointsVie_ = pV;
     }
 
     void recevoirAttaque(int pointsForce) {

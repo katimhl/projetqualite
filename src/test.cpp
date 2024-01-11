@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include <sstream>
 #include "PacManTerrain.h"
+#include "joueur.h"
 
 
 TEST_CASE("Deplacement du monstre aveugle") {
@@ -21,24 +22,25 @@ TEST_CASE("Monstre attaque l'aventurier") {
     SUBCASE("Attaque reussie avec probabilite elevee") {
         // Creer un monstre avec une probabilite d'attaque elevee
         Monstre monstre(0, 0, true, 10, 5, 0.9);
+        joueur j;
 
         // Appeler la methode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
-            monstre.attaquerAventurier();
+            monstre.attaquerAventurier(j);
             // Verifier que l'attaque est appliquee � l'aventurier lorsque la probabilit� est respect�e
-            if (monstre.getPointsVie() == 10) {
-                REQUIRE(monstre.getPointsVie() == 10 - static_cast<int>(5 * 0.9));
-            }
+            REQUIRE(monstre.getPointsVie() == 10 - static_cast<int>(5 * 0.9));
+            REQUIRE(j.voir_vie() == 10 - static_cast<int>(5 * 0.9));
         }
     }
 
     SUBCASE("Aucune attaque avec probabilit� basse") {
         // Cr�er un monstre avec une probabilit� d'attaque basse
         Monstre monstre(0, 0, true, 10, 5, 0.1);
+        joueur j;
 
         // Appeler la m�thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
-            monstre.attaquerAventurier();
+            monstre.attaquerAventurier(j);
             // V�rifier que l'attaque n'est pas appliqu�e � l'aventurier lorsque la probabilit� n'est pas respect�e
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10);
@@ -49,10 +51,11 @@ TEST_CASE("Monstre attaque l'aventurier") {
     SUBCASE("Monstre aveugle n'attaque pas") {
         // Cr�er un monstre aveugle
         Monstre monstre(0, 0, false, 10, 5, 0.9);
+        joueur j;
 
         // Appeler la m�thode attaquerAventurier plusieurs fois
         for (int i = 0; i < 100; ++i) {
-            monstre.attaquerAventurier();
+            monstre.attaquerAventurier(j);
             // V�rifier que l'attaque n'est pas appliqu�e � l'aventurier (monstre aveugle ne devrait pas attaquer)
             if (monstre.getPointsVie() == 10) {
                 REQUIRE(monstre.getPointsVie() == 10);

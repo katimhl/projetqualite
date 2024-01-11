@@ -67,7 +67,7 @@ public:
     void moveMonsters() {
         for (auto& monstre : monstres) {
             monstre.deplacerMonstre(pacmanRow, pacmanCol, t);
-            monstre.attaquerAventurier(); // Appel de la fonction d'attaque du monstre
+            monstre.attaquerAventurier(p1); // Appel de la fonction d'attaque du monstre
         }
     }
 
@@ -163,5 +163,6 @@ private:
     terrain t;
     bool amuletCollected;
     std::vector<Monstre> monstres;
+    joueur p1;
     int pacmanRow, pacmanCol; // Position d'avanturier
 };
