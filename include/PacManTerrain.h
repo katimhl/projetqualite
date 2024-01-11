@@ -10,6 +10,8 @@ public:
     }
 
     void display() const {
+        //nettoye la console avant de réécrir
+        system("cls");
         for (int i = 0; i < ROWS + 2; ++i) {//lignes du terrain
             for (int j = 0; j < COLS + 2; ++j) {//colonnes du terrain
                 if (i == 0 || i == ROWS + 1 || j == 0 || j == COLS + 1) {
