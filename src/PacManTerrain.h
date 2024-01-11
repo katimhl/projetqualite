@@ -25,7 +25,7 @@ public:
                     }
 
                     if (!isMonsterPresent) {
-                        std::cout << cellToChar(terrain[i - 1][j - 1]);/*Si aucun monstre n'est pr�sent � la position courante,
+                        std::cout << cellToChar(t[i - 1][j - 1]);/*Si aucun monstre n'est pr�sent � la position courante,
                                                                       cette partie affiche le caract�re correspond*/
                     }
                 }
@@ -66,28 +66,23 @@ public:
     et le terrain actuel comme param�tres.*/
     void moveMonsters() {
         for (auto& monstre : monstres) {
-            monstre.deplacerMonstre(pacmanRow, pacmanCol, terrain);
+            monstre.deplacerMonstre(pacmanRow, pacmanCol, t);
             monstre.attaquerAventurier(); // Appel de la fonction d'attaque du monstre
         }
     }
-    Cell getTerrain(){
-        return terrain[ROWS][COLS];
-    }
 
-private:
-    Cell terrain[ROWS][COLS];
-    bool amuletCollected;
-    std::vector<Monstre> monstres;
-    int pacmanRow, pacmanCol; // Position d'avanturier
+    auto getTerrain(){
+        return t;
+    }
 
     void initialize() {
         // Remplir le terrain avec des murs et des cases vides altern�es
         for (int i = 0; i < ROWS; ++i) {
             for (int j = 0; j < COLS; ++j) {
                 if (i % 2 == 0 && j % 2 == 0) {
-                    terrain[i][j] = WALL;//mur
+                    t[i][j] = WALL;//mur
                 } else {
-                    terrain[i][j] = EMPTY;//vide
+                    t[i][j] = EMPTY;//vide
                 }
             }
         }
@@ -95,12 +90,12 @@ private:
         // Placer avanturier au centre
         pacmanRow = ROWS / 2;
         pacmanCol = COLS / 2;
-        terrain[pacmanRow][pacmanCol] = PACMAN;
+        t[pacmanRow][pacmanCol] = PACMAN;
 
         // Placer l'amulette
         int amuletRow = rand() % ROWS;
         int amuletCol = rand() % COLS;
-        terrain[amuletRow][amuletCol] = AMULET;
+        t[amuletRow][amuletCol] = AMULET;
         amuletCollected = false;
 
         // Ajouter des monstres
@@ -111,7 +106,7 @@ private:
     void findPacman(int& row, int& col) const {
         for (int i = 0; i < ROWS; ++i) {
             for (int j = 0; j < COLS; ++j) {
-                if (terrain[i][j] == PACMAN) {
+                if (t[i][j] == PACMAN) {
                     row = i;
                     col = j;
                     return;
@@ -122,11 +117,11 @@ private:
 
     void movePacmanTo(int newRow, int newCol) {
         if (isValidMove(newRow, newCol)) {
-            terrain[pacmanRow][pacmanCol] = EMPTY;//mise � jour de la case ou il est l'avanturier
-            terrain[newRow][newCol] = PACMAN;//mise � jour de la case ou il va se deplac�
+            t[pacmanRow][pacmanCol] = EMPTY;//mise � jour de la case ou il est l'avanturier
+            t[newRow][newCol] = PACMAN;//mise � jour de la case ou il va se deplac�
 
             // Si Pac-Man atteint l'amulette, la collecter
-            if (terrain[newRow][newCol] == AMULET) {
+            if (t[newRow][newCol] == AMULET) {
                 collectAmulet();
             }
 
@@ -140,7 +135,7 @@ private:
     }
 
     bool isValidMove(int row, int col) const {
-        return row >= 0 && row < ROWS && col >= 0 && col < COLS && terrain[row][col] != WALL;
+        return row >= 0 && row < ROWS && col >= 0 && col < COLS && t[row][col] != WALL;
     }
 
     char cellToChar(Cell cell) const {
@@ -163,4 +158,10 @@ private:
                 return '?';
         }
     }
+
+private:
+    terrain t;
+    bool amuletCollected;
+    std::vector<Monstre> monstres;
+    int pacmanRow, pacmanCol; // Position d'avanturier
 };

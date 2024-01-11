@@ -8,11 +8,11 @@ public:
         : posX(X), posY(Y), estVoyant_(estVoyant), pointsVie_(pointsVie),
           pointsForce_(pointsForce), pourcentageHabilete_(pourcentageHabilete) {}
 
-    void deplacerMonstre(const int positionJoueurLigne, const int positionJoueurColonne, const Cell terrain[ROWS][COLS]) {
+    void deplacerMonstre(const int positionJoueurLigne, const int positionJoueurColonne, terrain t) {
         if (estVoyant_) {
-            deplacerMonstreVoyant(positionJoueurLigne, positionJoueurColonne, terrain);
+            deplacerMonstreVoyant(positionJoueurLigne, positionJoueurColonne, t);
         } else {
-            deplacerMonstreAveugle(terrain);
+            deplacerMonstreAveugle(t);
         }
     }
 
@@ -46,19 +46,19 @@ public:
     }
 
     // G�n�rer al�atoirement une direction (vers le haut, le bas, la gauche, ou la droite)
-    void deplacerMonstreAveugle(const Cell terrain[ROWS][COLS]) {
+    void deplacerMonstreAveugle(terrain t) {
         int directionX, directionY;
 
         do {
             directionX = rand() % 3 - 1;// -1, 0, ou 1
             directionY = rand() % 3 - 1;
-        } while (!isValidMove(posX + directionX, posY + directionY, terrain));
+        } while (!isValidMove(posX + directionX, posY + directionY, t));
  // Si la nouvelle position est valide, d�placer le monstre
         posX += directionX;
         posY += directionY;
     }
 
-    void deplacerMonstreVoyant(const int positionJoueurLigne, const int positionJoueurColonne, const Cell terrain[ROWS][COLS]) {
+    void deplacerMonstreVoyant(const int positionJoueurLigne, const int positionJoueurColonne, terrain t) {
         int directionX = 0; // D�clare deux variables pour stocker les composantes X et Y de la direction dans laquelle le monstre va se d�placer
         int directionY = 0;
 
@@ -77,14 +77,14 @@ public:
 
         // monstre se d�placer vers le joueur s'il y a une case vide en ajoutant la direction � ses coordonn�es actuelles
 
-        if (isValidMove(posX + directionX, posY + directionY, terrain)) {
+        if (isValidMove(posX + directionX, posY + directionY, t)) {
             posX += directionX;
             posY += directionY;
         }
     }
 //la fonction renvoie true, indiquant que le d�placement vers la position sp�cifi�e est valide
-    bool isValidMove(int row, int col, const Cell terrain[ROWS][COLS]) const {
-        return row >= 0 && row < ROWS && col >= 0 && col < COLS && terrain[row][col] == EMPTY;
+    bool isValidMove(int row, int col, terrain t) const {
+        return row >= 0 && row < ROWS && col >= 0 && col < COLS && t[row][col] == EMPTY;
     }
 
 private:

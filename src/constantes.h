@@ -21,3 +21,5 @@ enum Cell {
     AMULET,//amulette
     MONSTER//monstre voyant
 };
+
+using terrain = Cell[ROWS][COLS];
