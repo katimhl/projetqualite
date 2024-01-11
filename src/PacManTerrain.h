@@ -1,6 +1,6 @@
 #pragma once
 
-#include "constantes.h"
+//#include "constantes.h"
 #include "Monstre.h"
 
 class PacManTerrain {
@@ -10,8 +10,6 @@ public:
     }
 
     void display() const {
-        //nettoye la console avant de réécrir
-        system("cls");
         for (int i = 0; i < ROWS + 2; ++i) {//lignes du terrain
             for (int j = 0; j < COLS + 2; ++j) {//colonnes du terrain
                 if (i == 0 || i == ROWS + 1 || j == 0 || j == COLS + 1) {
@@ -100,9 +98,17 @@ public:
         t[amuletRow][amuletCol] = AMULET;
         amuletCollected = false;
 
+        placerPieces();
+
         // Ajouter des monstres
         monstres.push_back(Monstre(5, 5, false, 2, 5, 0.8));  // Monstre aveugle (position,point vie,point de force,habilit�)
         monstres.push_back(Monstre(8, 8, true, 1, 8, 0.8));   // Monstre voyant
+    }
+
+    void placerPieces(){
+        int coinsRow = rand() % ROWS;
+        int coinsCol = rand() % COLS;
+        t[coinsRow][coinsCol] = COINS;
     }
 
     void findPacman(int& row, int& col) const {
@@ -156,6 +162,8 @@ public:
                 return '%';
             case MONSTER:
                 return 'M';
+            case COINS:
+                return '€';
             default:
                 return '?';
         }

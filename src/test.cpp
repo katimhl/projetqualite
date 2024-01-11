@@ -107,11 +107,10 @@ TEST_CASE("D�placement du monstre aveugle") {
         Monstre monstre(5, 5, false, 2, 5, 0.8);
 
         // Cr�er un terrain avec une cellule vide � la nouvelle position souhait�e
-        Cell terrain[ROWS][COLS] = {EMPTY};
-        terrain[4][5] = EMPTY;
+        PacManTerrain terrain;
 
         // Appeler la m�thode deplacerMonstreAveugle
-        monstre.deplacerMonstreAveugle(terrain);
+        monstre.deplacerMonstreAveugle(terrain.getTerrain());
 
         // V�rifier que le monstre a �t� d�plac� vers le haut
         REQUIRE(monstre.getX() == 4);
@@ -127,11 +126,10 @@ TEST_CASE("D�placement du monstre voyant") {
         Monstre monstre(5, 5, true, 2, 5, 0.8);
 
         // Cr�er un terrain avec une cellule vide � la nouvelle position souhait�e
-        Cell terrain[ROWS][COLS] = {EMPTY};
-        terrain[5][6] = EMPTY;
+        PacManTerrain terrain;
 
         // Appeler la m�thode deplacerMonstreVoyant
-        monstre.deplacerMonstreVoyant(5, 6, terrain);
+        monstre.deplacerMonstreVoyant(5, 6, terrain.getTerrain());
 
         // V�rifier que le monstre a �t� d�plac� vers la droite
         REQUIRE(monstre.getX() == 5);
@@ -144,9 +142,6 @@ TEST_CASE("D�placement du monstre voyant") {
 TEST_CASE("Validation du mouvement") {
     PacManTerrain terrainPacMan;
     SUBCASE("Case valide") {
-        // Cr�er un terrain avec une cellule vide � la position sp�cifi�e
-        Cell terrain[ROWS][COLS] = {EMPTY};
-        terrain[2][3] = EMPTY;
 
         // Appeler la m�thode isValidMove
         bool result = terrainPacMan.isValidMove(2, 3);

@@ -19,7 +19,8 @@ enum Cell {
     PACMAN,//aventurier
     GHOST,//monstre aveugle
     AMULET,//amulette
-    MONSTER//monstre voyant
+    MONSTER,//monstre voyant
+    COINS
 };
 
 using terrain = Cell[ROWS][COLS];

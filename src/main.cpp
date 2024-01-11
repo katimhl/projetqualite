@@ -19,7 +19,6 @@ int main() {
     while (!terrain.isAmuletCollected()) {
         // Capturer la touche du clavier sans attendre l'appui sur la touche "Entr�e"
         moveDirection = _getch();
-
         // D�placer Pac-Man en fonction de la touche captur�e
         terrain.movePacman(moveDirection);
 

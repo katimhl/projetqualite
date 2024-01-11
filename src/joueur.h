@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JOUEUR_H
+#define JOUEUR_H
 
 #include "Monstre.h"
 
@@ -25,7 +26,6 @@ public:
 	void perd_vie(int pV);
 	void gagne_vie(int pV);
 	void attaque(Monstre& e);
-	//virtual void deplace(int direction) = 0;
 private:
 	int points_de_vie;
 	int points_de_defense;
@@ -34,3 +34,5 @@ private:
 	int bourse;
 	epee epee_joueur;
 };
+
+#endif
