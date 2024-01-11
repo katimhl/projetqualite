@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "constantes.h"
+#include "constantes.h"
 #include "Monstre.h"
 
 class PacManTerrain {

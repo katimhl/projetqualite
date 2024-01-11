@@ -30,7 +30,7 @@ public:
         return pointsVie_;
     }
 
-    int setPointsVie(int pV) {
+    void setPointsVie(int pV) {
         pointsVie_ = pV;
     }
 
