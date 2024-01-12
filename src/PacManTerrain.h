@@ -3,6 +3,71 @@
 //#include "constantes.h"
 #include "Monstre.h"
 
+class Terrain {
+private:
+    std::vector<std::vector<char>> grille;
+    std::vector<Monstre> horde;
+    joueur d_joueur;
+    int largeur, hauteur;
+
+public:
+    Terrain(int largeur=20, int hauteur=20) : largeur(largeur), hauteur(hauteur) {
+        grille = std::vector<std::vector<char>>(hauteur, std::vector<char>(largeur, ' '));
+
+        // Création des murs et de la porte
+        for (int i = 0; i < largeur; ++i) {
+            grille[0][i] = grille[hauteur - 1][i] = '#';
+        }
+        for (int i = 0; i < hauteur; ++i) {
+            grille[i][0] = grille[i][largeur - 1] = '#';
+        }
+        grille[hauteur / 2][0] = '@'; // Porte
+
+    }
+
+    void afficherTerrain() {
+        for (int i = 0; i < hauteur; ++i) {
+            for (int j = 0; j < largeur; ++j) {
+                std::cout << grille[i][j] << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    void positionnerMonstre() {
+        Monstre m1{ 1 + rand() % largeur, 1 + rand() % hauteur ,true,10,15,0.5};
+        Monstre m2{ 1 + rand() % largeur, 1 + rand() % hauteur ,false,10,15,0.5};
+        horde.push_back(m1);
+        horde.push_back(m2);
+    }
+
+    void boougerJoueur(char direction) {
+
+        switch (direction) {
+            case 'z': // Move up
+                d_joueur.deplace(d_joueur.X() , d_joueur.Y() - 1);
+                break;
+            case 's': // Move down
+                d_joueur.deplace(d_joueur.X() , d_joueur.Y() + 1);
+                break;
+            case 'q': // Move left
+                d_joueur.deplace(d_joueur.X() - 1 , d_joueur.Y());
+                break;
+            case 'd': // Move right
+                d_joueur.deplace(d_joueur.X() + 1 , d_joueur.Y());
+                break;
+        }
+        afficherTerrain();
+    }
+
+    void bougerMonstre() {
+        for (auto& monstre : horde) {
+            monstre.deplacerMonstre(d_joueur.X(), d_joueur.Y());
+            monstre.attaquerAventurier(d_joueur); // Appel de la fonction d'attaque du monstre
+        }
+    }
+};
+
 class PacManTerrain {
 public:
     PacManTerrain() {

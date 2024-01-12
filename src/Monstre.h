@@ -9,11 +9,11 @@ public:
         : posX(X), posY(Y), estVoyant_(estVoyant), pointsVie_(pointsVie),
           pointsForce_(pointsForce), pourcentageHabilete_(pourcentageHabilete) {}
 
-    void deplacerMonstre(const int positionJoueurLigne, const int positionJoueurColonne, terrain t) {
+    void deplacerMonstre(const int positionJoueurLigne, const int positionJoueurColonne) {
         if (estVoyant_) {
-            deplacerMonstreVoyant(positionJoueurLigne, positionJoueurColonne, t);
+            deplacerMonstreVoyant(positionJoueurLigne, positionJoueurColonne);
         } else {
-            deplacerMonstreAveugle(t);
+            deplacerMonstreAveugle();
         }
     }
 
@@ -51,19 +51,19 @@ public:
     }
 
     // G�n�rer al�atoirement une direction (vers le haut, le bas, la gauche, ou la droite)
-    void deplacerMonstreAveugle(terrain t) {
+    void deplacerMonstreAveugle() {
         int directionX, directionY;
 
         do {
             directionX = rand() % 3 - 1;// -1, 0, ou 1
             directionY = rand() % 3 - 1;
-        } while (!isValidMove(posX + directionX, posY + directionY, t));
- // Si la nouvelle position est valide, d�placer le monstre
+        } while ();
+    // Si la nouvelle position est valide, d�placer le monstre
         posX += directionX;
         posY += directionY;
     }
 
-    void deplacerMonstreVoyant(const int positionJoueurLigne, const int positionJoueurColonne, terrain t) {
+    void deplacerMonstreVoyant(const int positionJoueurLigne, const int positionJoueurColonne, Terrain t) {
         int directionX = 0; // D�clare deux variables pour stocker les composantes X et Y de la direction dans laquelle le monstre va se d�placer
         int directionY = 0;
 
@@ -88,7 +88,7 @@ public:
         }
     }
 //la fonction renvoie true, indiquant que le d�placement vers la position sp�cifi�e est valide
-    bool isValidMove(int row, int col, terrain t) const {
+    bool isValidMove(int row, int col, Terrain t) const {
         return row >= 0 && row < ROWS && col >= 0 && col < COLS && t[row][col] == EMPTY;
     }
 
