@@ -1,3 +1,6 @@
+#ifndef CONSTANTES_H
+#define CONSTANTES_H
+
 #include <iostream>
 #include <conio.h> // Pour _getch()
 #include <iomanip>
@@ -13,14 +16,14 @@ const int COLS = 20;
 
 //Cette �num�ration repr�sente les diff�rents types de cellules sur le terrain du jeu
 enum Cell {
-    EMPTY,//Cellule vide
-    WALL,//mur
+    EMPTY = ' ',//Cellule vide
+    WALL = '#',//mur
     DOT,//Point
     PACMAN,//aventurier
     GHOST,//monstre aveugle
     AMULET,//amulette
     MONSTER,//monstre voyant
-    COINS
+    SORTIE
 };
 
-using terrain = Cell[ROWS][COLS];
+#endif

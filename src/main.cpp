@@ -11,25 +11,31 @@
 #include "PacManTerrain.h"
 
 int main() {
-    PacManTerrain terrain;
+    PacManTerrain pacManTerrain;
     char moveDirection;
 
-    std::cout << "Utilisez les touches z, q, s, d pour deplacer Pac-Man." << std::endl;
+    std::cout << "Utilisez les touches z:haut, s:bas, q:gauche, d:droite pour déplacer Pac-Man." << std::endl;
 
-    while (!terrain.isAmuletCollected()) {
-        // Capturer la touche du clavier sans attendre l'appui sur la touche "Entr�e"
-        moveDirection = _getch();
-        // D�placer Pac-Man en fonction de la touche captur�e
-        terrain.movePacman(moveDirection);
 
-        // Afficher le terrain apr�s chaque d�placement
-        terrain.display();
+while (true) {
+    // Capturer la touche du clavier sans attendre l'appui sur la touche "Entrée"
 
-        // Pause de 300 millisecondes entre chaque d�placement
-        std::this_thread::sleep_for(std::chrono::milliseconds(300));
-    }
+    moveDirection = _getch();
+       system("cls");
 
-    std::cout << "F�licitations ! Pac-Man a r�cup�r� l'amulette." << std::endl;
+    // Déplacer Pac-Man en fonction de la touche capturée
+    pacManTerrain.movePacman(moveDirection);
 
-    return 0;
+    // Afficher le terrain après chaque déplacement
+    pacManTerrain.display();
+
+    // Pause de 500 millisecondes entre chaque déplacement
+  //  std::this_thread::sleep_for(std::chrono::milliseconds(500));
 }
+
+std::cout << "Félicitations ! Pac-Man a récupéré l'amulette." << std::endl;
+
+return 0;
+}
+
+

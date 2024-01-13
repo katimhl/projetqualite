@@ -1,4 +1,5 @@
 #include "joueur.h"
+#include "Monstre.h"
 
 joueur::joueur(int pVie, int pDef, int pforce):
 	points_de_vie{pVie},points_de_defense{pDef}, points_de_force{pforce}
