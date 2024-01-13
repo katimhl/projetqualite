@@ -22,7 +22,7 @@ public:
         double probabiliteAttaque = (rand() % 100) / 100.0;
         if (probabiliteAttaque < pourcentageHabilete_) {
             int attaque = static_cast<int>(pointsForce_ * 0.9);
-            // Appliquer l'attaque à l'aventurier
+            // Appliquer l'attaque � l'aventurier
              recevoirAttaque(attaque);
 
         }
@@ -37,10 +37,10 @@ public:
         pointsVie_ -= pointsForce;
         if (pointsVie_ < 0) {
             pointsVie_ = 0;
-            estMort_ = true; // Utiliser estMort_ pour référencer le membre de la classe
-        std::cout << "Monstre a été vaincu !" << std::endl;
+            estMort_ = true; // Utiliser estMort_ pour r�f�rencer le membre de la classe
+        std::cout << "Monstre a �t� vaincu !" << std::endl;
         }
-        std::cout << "Monstre a reçu une attaque ! Points de vie restants : " << pointsVie_ << std::endl;}
+        std::cout << "Monstre a re�u une attaque ! Points de vie restants : " << pointsVie_ << std::endl;}
 
 
     void afficherPointsDeVie() const {
@@ -59,6 +59,9 @@ public:
     bool estVivant() const  {
         return estMort_;
     }
+    int getPointDeForce() const {
+        return  pointsForce_;
+    }
 
 private:
     int posX;
@@ -68,8 +71,7 @@ private:
     int pointsForce_;
     double pourcentageHabilete_;
     bool estMort_;
-public:
- // Générer aléatoirement une direction (vers le haut, le bas, la gauche, ou la droite)
+ // G�n�rer al�atoirement une direction (vers le haut, le bas, la gauche, ou la droite)
     void deplacerMonstreAveugle(const Cell terrain[ROWS][COLS]) {
         int directionX, directionY;
 
@@ -77,18 +79,18 @@ public:
             directionX = rand() % 3 - 1;// -1, 0, ou 1
             directionY = rand() % 3 - 1;
         } while (!isValidMove(posX + directionX, posY + directionY, terrain));
- // Si la nouvelle position est valide, déplacer le monstre
+ // Si la nouvelle position est valide, d�placer le monstre
         posX += directionX;
         posY += directionY;
     }
 
     void deplacerMonstreVoyant(const int positionJoueurLigne, const int positionJoueurColonne, const Cell terrain[ROWS][COLS]) {
-        int directionX = 0; // Déclare deux variables pour stocker les composantes X et Y de la direction dans laquelle le monstre va se déplacer
+        int directionX = 0; // D�clare deux variables pour stocker les composantes X et Y de la direction dans laquelle le monstre va se d�placer
         int directionY = 0;
 
         // Calculer la direction vers le joueur
         if (posX < positionJoueurLigne) {
-            directionX = 1;//Si la position X du monstre est inférieure à la position X du joueur, le monstre se déplace vers la droite (directionX = 1).
+            directionX = 1;//Si la position X du monstre est inf�rieure � la position X du joueur, le monstre se d�place vers la droite (directionX = 1).
         } else if (posX > positionJoueurLigne) {
             directionX = -1;
         }
@@ -99,17 +101,18 @@ public:
             directionY = -1;
         }
 
-        // monstre se déplacer vers le joueur s'il y a une case vide en ajoutant la direction à ses coordonnées actuelles
+        // monstre se d�placer vers le joueur s'il y a une case vide en ajoutant la direction � ses coordonn�es actuelles
 
         if (isValidMove(posX + directionX, posY + directionY, terrain)) {
             posX += directionX;
             posY += directionY;
         }
     }
-//la fonction renvoie true, indiquant que le déplacement vers la position spécifiée est valide
+//la fonction renvoie true, indiquant que le d�placement vers la position sp�cifi�e est valide
     bool isValidMove(int row, int col, const Cell terrain[ROWS][COLS]) const {
         return row >= 0 && row < ROWS && col >= 0 && col < COLS && terrain[row][col] == EMPTY;
     }
 };
+
 
 #endif

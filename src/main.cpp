@@ -28,12 +28,11 @@ while (true) {
 
     // Afficher le terrain après chaque déplacement
     pacManTerrain.display();
-
-    // Pause de 500 millisecondes entre chaque déplacement
-  //  std::this_thread::sleep_for(std::chrono::milliseconds(500));
+  
 }
 
 std::cout << "Félicitations ! Pac-Man a récupéré l'amulette." << std::endl;
+std::this_thread::sleep_for(std::chrono::milliseconds(500));
 
 return 0;
 }
