@@ -68,8 +68,6 @@ public:
 afficherPointsDeVieJoueur();
     }
 
-
-
 //Lorsque cette fonction est appel�e, cela signifie que avanturier(pac-man) a collect� l'amulette sur le terrain.
     void collectAmulet() {
         amuletCollected = true;
@@ -88,17 +86,6 @@ afficherPointsDeVieJoueur();
     bool isGameEnded() {
         return gameEnded;
     }
-
-   /*void isSortie() {
-
-          sortieok = true;
-}
-     bool isSortieok ()  {//v�rifier si l'amulette a �t� collect�e
-        return sortieok ;}*/
-
-
-
-
 
     void movePacman(char direction) {
         int pacManRow, pacManCol;
@@ -168,8 +155,12 @@ private:
 
     // Place the exit in a random empty cell
 
+    while (terrain[exitRow][exitCol] == WALL)
+    {
         exitRow = rand() % ROWS;
         exitCol = rand() % COLS;
+    }
+        
      //   terrain[exitRow][exitCol] = sortie;
 
         // Placer avanturier au centre
