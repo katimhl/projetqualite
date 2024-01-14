@@ -17,24 +17,24 @@ int main() {
     std::cout << "Utilisez les touches z:haut, s:bas, q:gauche, d:droite pour déplacer Pac-Man." << std::endl;
 
 
-while (true) {
-    // Capturer la touche du clavier sans attendre l'appui sur la touche "Entrée"
+    while (true) {
+        // Capturer la touche du clavier sans attendre l'appui sur la touche "Entrée"
 
-    moveDirection = _getch();
-       system("cls");
+        moveDirection = _getch();
+        system("cls");
 
-    // Déplacer Pac-Man en fonction de la touche capturée
-    pacManTerrain.movePacman(moveDirection);
+        // Déplacer Pac-Man en fonction de la touche capturée
+        pacManTerrain.movePacman(moveDirection);
 
-    // Afficher le terrain après chaque déplacement
-    pacManTerrain.display();
-  
-}
+        // Afficher le terrain après chaque déplacement
+        pacManTerrain.display();
+    
+    }
 
-std::cout << "Félicitations ! Pac-Man a récupéré l'amulette." << std::endl;
-std::getchar();
+    std::cout << "Félicitations ! Pac-Man a récupéré l'amulette." << std::endl;
+    system("pause");
 
-return 0;
+    return 0;
 }
 
 

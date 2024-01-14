@@ -71,6 +71,7 @@ private:
     int pointsForce_;
     double pourcentageHabilete_;
     bool estMort_;
+public:
  // G�n�rer al�atoirement une direction (vers le haut, le bas, la gauche, ou la droite)
     void deplacerMonstreAveugle(const Cell terrain[ROWS][COLS]) {
         int directionX, directionY;

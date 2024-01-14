@@ -127,17 +127,27 @@ afficherPointsDeVieJoueur();
         }
     }
 
+    Cell(*getTerrain())[COLS]  {
+        
+        return terrain;
+    }
+
+    int getVieJoueur()const{
+        return pointsVieJoueur;
+    }
+
 private:
     Cell terrain[ROWS][COLS];
     bool amuletCollected;
     std::vector<Monstre> monstres;
     int pacmanRow, pacmanCol; // Position d'avanturier
     int amuletRow,amuletCol;
-     bool sortieok;
-      int exitRow ;
+    bool sortieok;
+    int exitRow ;
     int exitCol;
     bool gameEnded = false;
     int pointsVieJoueur;
+public:
     void initialize() {
         // Remplir le terrain avec des murs et des cases vides altern�es
         std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -154,7 +164,8 @@ private:
     }
 
     // Place the exit in a random empty cell
-
+    exitRow = rand() % ROWS;
+    exitCol = rand() % COLS;
     while (terrain[exitRow][exitCol] == WALL)
     {
         exitRow = rand() % ROWS;
