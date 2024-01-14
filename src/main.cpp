@@ -32,7 +32,7 @@ while (true) {
 }
 
 std::cout << "Félicitations ! Pac-Man a récupéré l'amulette." << std::endl;
-std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+std::getchar();
 
 return 0;
 }
