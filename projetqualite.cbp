@@ -32,7 +32,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="main.cpp" />
+		<Unit filename="src/Monstre.h" />
+		<Unit filename="src/PacManTerrain.h" />
+		<Unit filename="src/constantes.h" />
+		<Unit filename="src/joueur.cpp" />
+		<Unit filename="src/joueur.h" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

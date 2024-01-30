@@ -128,7 +128,7 @@ afficherPointsDeVieJoueur();
     }
 
     Cell(*getTerrain())[COLS]  {
-        
+
         return terrain;
     }
 
@@ -171,7 +171,7 @@ public:
         exitRow = rand() % ROWS;
         exitCol = rand() % COLS;
     }
-        
+
      //   terrain[exitRow][exitCol] = sortie;
 
         // Placer avanturier au centre
